@@ -1,5 +1,6 @@
 {%extends "base.html"%}
 <!-- prettier-ignore -->
+{%block title %}Search Home{%endblock%}
 
 {% block content %}
 <!-- Full image background with stylized search bar in the middle. -->
@@ -29,7 +30,7 @@
             <span class="navbar-item has-text-centered">
               <a class="button is-info is-inverted" href="/logout">
                 <span class="icon">
-                  <i class="fab fa-github"></i>
+                  <i class="fas fa-sign-out-alt"></i>
                 </span>
                 <span>Logout</span>
               </a>
@@ -43,26 +44,20 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="home-title-text">Screen Marvel</h1>
-
-      <p class="subtitle">Search your favorite movies, series, or episodes.</p>
-      <div class="container is-centered">
-        <form action="/">
-          <div class="field has-addons is-grouped is-grouped-centered">
-            <div class="control">
-              <input
-                class="input is-rounded is-medium is-expanded"
-                type="text"
-                name="title_search"
-                placeholder="Search Movie"
-              />
-            </div>
-            <div class="control">
-              <button class="button is-link is-rounded is-medium" type="submit">
-                Search
-              </button>
-            </div>
-          </div>
-        </form>
+      <p class="subtitle">
+        Search for your favorite movies, series, or episodes
+      </p>
+      <div class="field is-grouped">
+        <p class="control is-expanded">
+          <input
+            class="input"
+            type="text"
+            placeholder="What do you want to watch?"
+          />
+        </p>
+        <p class="control">
+          <a class="button is-info"> Search </a>
+        </p>
       </div>
     </div>
   </div>
