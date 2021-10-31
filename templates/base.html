@@ -13,10 +13,13 @@
     />
 
     <!-- ====================== GOOGLE FONTS ========================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- ====================== BULMA CDN ========================== -->
 
     <link
@@ -28,46 +31,6 @@
   </head>
 
   <body>
-    
-<section class="hero is-ingo is-fullheight">
-  <!-- Hero head: will stick at the top -->
-  <div class="hero-head">
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <h1 class="navbar-text-logo">Screen Marvel</h1>
-          </a>
-          <span class="navbar-burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item is-active " href="/">
-              Home
-            </a>
-            <a class="navbar-item"href="/favorites" >
-              Favorites
-            </a>
-            <a class="navbar-item" href="/account">
-              Account
-            </a>
-            <span class="navbar-item has-text-centered">
-              <a class="button is-primary is-inverted" href="/logout">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Logout</span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
     <!-- WEBSITE MESSAGE FLASHING AND ERRORS -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %}

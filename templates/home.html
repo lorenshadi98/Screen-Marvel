@@ -6,33 +6,65 @@
 <!-- Two buttons: One for signup and one for login -->
 <!-- ScreenMarvel Name in the middle on top of the search bar -->
 
-<!-- Hero content: will be in the middle -->
-<div class="hero-body">
-  
-  <div class="container has-text-centered">
-    <h1 class="home-title-text">Screen Marvel</h1>
-
-    <p class="subtitle">Search your favorite movies, series, or episodes.</p>
-    <div class="container is-centered">
-      <form action="/">
-        <div class="field has-addons is-grouped is-grouped-centered">
-          <div class="control">
-            <input
-              class="input is-rounded is-medium is-expanded"
-              type="text"
-              name="title_search"
-              placeholder="Search Movie"
-            />
-          </div>
-          <div class="control">
-            <button class="button is-link is-rounded is-medium" type="submit">
-              Search
-            </button>
+<section class="hero is-ingo is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <h1 class="navbar-text-logo">Screen Marvel</h1>
+          </a>
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="/"> Home </a>
+            <a class="navbar-item" href="/favorites"> Favorites </a>
+            <a class="navbar-item" href="/account"> Account </a>
+            <span class="navbar-item has-text-centered">
+              <a class="button is-info is-inverted" href="/logout">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Logout</span>
+              </a>
+            </span>
           </div>
         </div>
-      </form>
+      </div>
+    </nav>
+  </div>
+
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="home-title-text">Screen Marvel</h1>
+
+      <p class="subtitle">Search your favorite movies, series, or episodes.</p>
+      <div class="container is-centered">
+        <form action="/">
+          <div class="field has-addons is-grouped is-grouped-centered">
+            <div class="control">
+              <input
+                class="input is-rounded is-medium is-expanded"
+                type="text"
+                name="title_search"
+                placeholder="Search Movie"
+              />
+            </div>
+            <div class="control">
+              <button class="button is-link is-rounded is-medium" type="submit">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </section>
 {%endblock%}
