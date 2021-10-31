@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ====================== Stylesheets ========================== -->
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+
+    <!-- ====================== GOOGLE FONTS ========================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+    
+    <!-- ====================== BULMA CDN ========================== -->
 
     <link
       rel="stylesheet"
@@ -17,65 +27,47 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
 
-  <body class="has-navbar-fixed-top">
-    <nav
-      class="navbar is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img
-            src="static/images/color-logo-nobg.svg"
-            width="200"
-            height="100"
-          />
-        </a>
-
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="mainNavbar"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="mainNavbar" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item"> Search </a>
-
-          <a class="navbar-item"> Popular </a>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Account </a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item"> Account Details </a>
-              <a class="navbar-item"> Favorites </a>
-              <a class="navbar-item"> Logout </a>
-              <hr class="navbar-divider" />
-              <a class="navbar-item"> Report an issue </a>
-            </div>
-          </div>
+  <body>
+    
+<section class="hero is-primary is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <h1 class="navbar-text-logo">Screen Marvel</h1>
+          </a>
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active " href="/">
+              Home
+            </a>
+            <a class="navbar-item"href="/favorites" >
+              Favorites
+            </a>
+            <a class="navbar-item" href="/account">
+              Account
+            </a>
+            <span class="navbar-item has-text-centered">
+              <a class="button is-primary is-inverted" href="/logout">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Logout</span>
               </a>
-              <a class="button is-light"> Log in </a>
-            </div>
+            </span>
           </div>
         </div>
       </div>
     </nav>
+  </div>
     <!-- WEBSITE MESSAGE FLASHING AND ERRORS -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %}

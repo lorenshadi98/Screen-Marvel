@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+<!-- prettier-ignore -->
+
+{% block content %}
+<!-- Full image background with stylized search bar in the middle. -->
+<!-- Two buttons: One for signup and one for login -->
+<!-- ScreenMarvel Name in the middle on top of the search bar -->
+
+<!-- Hero content: will be in the middle -->
+
+<div class="hero-body">
+  <div class="container has-text-centered">
+    <p class="subtitle">Search your favorite movies, series, or episodes.</p>
+    <div class="container is-centered">
+      <form action="/">
+        <div class="field has-addons is-grouped is-grouped-centered">
+          <div class="control">
+            <input
+              class="input is-rounded is-medium"
+              type="text"
+              name="title_search"
+              placeholder="Search Movie"
+            />
+          </div>
+          <div class="control">
+            <button class="button is-link is-rounded is-medium" type="submit">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+{%endblock%}
