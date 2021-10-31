@@ -1,5 +1,34 @@
+.hero {
+  /* Location of the image */
+  background-image: url(images/massive_bg.jpg);
+
+  /* Background image is centered vertically and horizontally at all times */
+  background-position: center center;
+
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+
+  /* Background image is fixed in the viewport so that it doesn't move when
+  the content's height is greater than the image's height */
+  background-attachment: fixed;
+
+  /* This is what makes the background image rescale based
+  on the container's size */
+  background-size: cover;
+
+  /* Set a background color that will be displayed
+  while the background image is loading */
+  background-color: #f3e4fb;
+}
+
 .navbar-text-logo {
   font-family: 'Merriweather', serif;
   font-size: 1.5em;
+  font-weight: 400;
+}
+
+.home-title-text {
+  font-family: 'Merriweather', serif;
+  font-size: 5em;
   font-weight: 400;
 }
