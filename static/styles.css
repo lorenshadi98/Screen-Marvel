@@ -1,16 +1,9 @@
 .hero {
   background-color: #30363d;
 }
-.navbar {
-  background-color: #30363d;
-}
-.general-background {
-  background-color: #30363d;
-}
 
 .navbar-text-logo,
-.home-title-text,
-.search-title-text {
+.home-title-text {
   font-family: 'Merriweather', serif;
   font-weight: 400;
 }
@@ -21,10 +14,6 @@
 
 .home-title-text {
   font-size: 5em;
-}
-
-.search-title-text {
-  font-size: 3em;
 }
 
 .columns {
