@@ -27,7 +27,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 def handle_movie_query(query):
     user_movie_search = {
         "s": query,
-        "apikey": API_KEY
+        "apikey": API_KEY,
+        "page": '1'
     }
     response = requests.get(BASE_API_URL, params=user_movie_search)
     data = response.text

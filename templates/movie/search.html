@@ -3,13 +3,12 @@
 {%block title %}Search Results{%endblock%}
 
 {% block content %}
-<section class="hero is-fullheight">
   <!-- Hero head: will stick at the top -->
   {{navBarHeader()}}
   <div class="hero-body">
-    <div class="columns is-multiline">
+    <div class="columns is-multiline m-3">
       {% for key in url_list %}
-      <div class="column is-one-quarter m-2">
+      <div class="column box m-2 is-one-quarter">
         <!-- prettier-ignore -->
 
         {%if key["Poster"] != "N/A" %} 
@@ -21,11 +20,12 @@
         />
         {%endif%}
         <div class="title">{{key["Title"]}} ({{key["Year"]}})</div>
-        <div class="subtitle">({{key["Type"]|capitalize}})</div>
-        <div class="subtitle">
-          IMDB ID: {{key["imdbID"] |upper }}
 
-          <a href="/movie/{movie.id}/details">More details</a>
+        <div class="subtitle">
+          <a  href="https://www.imdb.com/title/{{key["imdbID"]}}">View on IMDB</a>
+        </div>
+        <div class="subtitle">
+          <a href="users/add/{{key["imdbID"]}}">Add to favorites</a>
         </div>
       </div>
       {% endfor %}

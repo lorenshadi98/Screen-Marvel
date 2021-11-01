@@ -3,7 +3,6 @@
   background-image: url(images/massive_bg.jpg);
 
   /* Background image is centered vertically and horizontally at all times */
-  background-position: center center;
 
   /* Background image doesn't tile */
   background-repeat: no-repeat;
@@ -22,14 +21,25 @@
   height: 100%;
 }
 
-.navbar-text-logo {
+.navbar-text-logo,
+.home-title-text,
+.search-title-text {
   font-family: 'Merriweather', serif;
-  font-size: 1.5em;
   font-weight: 400;
 }
 
+.navbar-text-logo {
+  font-size: 1.5em;
+}
+
 .home-title-text {
-  font-family: 'Merriweather', serif;
   font-size: 5em;
-  font-weight: 400;
+}
+
+.search-title-text {
+  font-size: 3em;
+}
+
+.columns {
+  max-width: 100%;
 }
