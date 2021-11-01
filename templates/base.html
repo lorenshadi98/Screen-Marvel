@@ -39,18 +39,51 @@
   </head>
 
   <body>
+    <!-- prettier-ignore -->
+    {% macro navBarHeader() -%}
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+              <h1 class="navbar-text-logo">Screen Marvel</h1>
+            </a>
+            <span class="navbar-burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item is-active" href="/"> Home </a>
+              <a class="navbar-item" href="/favorites"> Favorites </a>
+              <a class="navbar-item" href="/account"> Account </a>
+              <span class="navbar-item has-text-centered">
+                <a class="button is-info is-inverted" href="/logout">
+                  <span class="icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>Logout</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    {%- endmacro %}
     <!-- WEBSITE MESSAGE FLASHING AND ERRORS -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %}
     <ul class="flashes">
       {% for category, message in messages %}
-      <div class="text-center alert alert-{{ category }} m-1">
+      <div class="notification has-text-centered	 is-{{ category }} m-1">
         {{ message }}
       </div>
       {% endfor %}
     </ul>
     {% endif %} {% endwith %}
-
     <!-- WEBSITE CONTENT HERE -->
     <div id="content">{% block content %}{% endblock %}</div>
   </body>

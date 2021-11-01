@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+<!-- prettier-ignore -->
+{%block title %}Search Results{%endblock%}
+
+{% block content %}
+<section class="hero is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  {{navBarHeader()}}
+  <div class="hero-body">
+    <div class="columns is-multiline">
+      {% for key in url_list %}
+      <div class="column is-one-quarter m-2">
+        <!-- prettier-ignore -->
+
+        {%if key["Poster"] != "N/A" %} 
+        <img class="image" src="{{key["Poster"]}}" alt="Placeholder image" /> 
+        {%else%}
+        <img
+          src="https://via.placeholder.com/300x450?text=No+Movie+Poster+Found"
+          alt="Placeholder image"
+        />
+        {%endif%}
+        <div class="title">{{key["Title"]}} ({{key["Year"]}})</div>
+        <div class="subtitle">({{key["Type"]|capitalize}})</div>
+        <div class="subtitle">
+          IMDB ID: {{key["imdbID"] |upper }}
+
+          <a href="/movie/{movie.id}/details">More details</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- prettier-ignore -->
+{%endblock%}

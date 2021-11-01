@@ -9,37 +9,7 @@
 
 <section class="hero is-ingo is-fullheight">
   <!-- Hero head: will stick at the top -->
-  <div class="hero-head">
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <h1 class="navbar-text-logo">Screen Marvel</h1>
-          </a>
-          <span class="navbar-burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item is-active" href="/"> Home </a>
-            <a class="navbar-item" href="/favorites"> Favorites </a>
-            <a class="navbar-item" href="/account"> Account </a>
-            <span class="navbar-item has-text-centered">
-              <a class="button is-info is-inverted" href="/logout">
-                <span class="icon">
-                  <i class="fas fa-sign-out-alt"></i>
-                </span>
-                <span>Logout</span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
+  {{navBarHeader()}}
 
   <div class="hero-body">
     <div class="container has-text-centered">
@@ -47,18 +17,21 @@
       <p class="subtitle">
         Search for your favorite movies, series, or episodes
       </p>
-      <div class="field is-grouped">
-        <p class="control is-expanded">
-          <input
-            class="input"
-            type="text"
-            placeholder="What do you want to watch?"
-          />
-        </p>
-        <p class="control">
-          <a class="button is-info"> Search </a>
-        </p>
-      </div>
+      <form action="/search">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <input
+              class="input"
+              type="text"
+              placeholder="What do you want to watch?"
+              name="movie_title"
+            />
+          </p>
+          <p class="control">
+            <button class="button is-info" type="submit">Search</button>
+          </p>
+        </div>
+      </form>
     </div>
   </div>
 </section>

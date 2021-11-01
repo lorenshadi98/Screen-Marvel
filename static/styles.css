@@ -19,6 +19,7 @@
   /* Set a background color that will be displayed
   while the background image is loading */
   background-color: #f3e4fb;
+  height: 100%;
 }
 
 .navbar-text-logo {
