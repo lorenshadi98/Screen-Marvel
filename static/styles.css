@@ -3,7 +3,8 @@
 }
 
 .navbar-text-logo,
-.home-title-text {
+.home-title-text,
+.signup-title-text {
   font-family: 'Merriweather', serif;
   font-weight: 400;
 }
@@ -14,8 +15,12 @@
 
 .home-title-text {
   font-size: 5em;
+  font-weight: 700;
 }
 
+.signup-title-text {
+  font-size: 3em;
+}
 .columns {
   max-width: 100%;
 }
@@ -45,6 +50,31 @@
 }
 
 .btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-grad-danger {
+  background-image: linear-gradient(
+    to right,
+    #e52d27 0%,
+    #b31217 51%,
+    #e52d27 100%
+  );
+}
+.btn-grad-danger {
+  padding: 15px 45px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad-danger:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;

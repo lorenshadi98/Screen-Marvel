@@ -58,6 +58,7 @@
             <div class="navbar-end">
               <a class="navbar-item is-active" href="/"> Home </a>
               <a class="navbar-item" href="/favorites"> Favorites </a>
+              {% if g.user %}
               <a class="navbar-item" href="/account"> Account </a>
               <span class="navbar-item has-text-centered">
                 <a class="button is-info is-inverted" href="/logout">
@@ -67,6 +68,17 @@
                   <span>Logout</span>
                 </a>
               </span>
+              {%else%}
+              <a class="navbar-item" href="/signup"> Signup </a>
+              <span class="navbar-item has-text-centered">
+                <a class="button is-info is-inverted" href="/login">
+                  <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span>
+                  <span>Login</span>
+                </a>
+              </span>
+              {%endif%}
             </div>
           </div>
         </div>
