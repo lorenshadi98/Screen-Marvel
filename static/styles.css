@@ -1,24 +1,11 @@
 .hero {
-  /* Location of the image */
-  background-image: url(images/massive_bg.jpg);
-
-  /* Background image is centered vertically and horizontally at all times */
-
-  /* Background image doesn't tile */
-  background-repeat: no-repeat;
-
-  /* Background image is fixed in the viewport so that it doesn't move when
-  the content's height is greater than the image's height */
-  background-attachment: fixed;
-
-  /* This is what makes the background image rescale based
-  on the container's size */
-  background-size: cover;
-
-  /* Set a background color that will be displayed
-  while the background image is loading */
-  background-color: #f3e4fb;
-  height: 100%;
+  background-color: #30363d;
+}
+.navbar {
+  background-color: #30363d;
+}
+.general-background {
+  background-color: #30363d;
 }
 
 .navbar-text-logo,
@@ -42,4 +29,34 @@
 
 .columns {
   max-width: 100%;
+}
+
+.box {
+  align-items: center;
+  text-align: center;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #02aab0 0%,
+    #00cdac 51%,
+    #02aab0 100%
+  );
+}
+.btn-grad {
+  padding: 15px 45px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
