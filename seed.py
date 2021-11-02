@@ -2,7 +2,7 @@
 """Seed database and create tables"""
 
 from app import db
-from models import User, FavoriteMovie, UserFavoriteMovie
+from models import User, FavoriteMovie
 
 
 db.drop_all()

@@ -1,12 +1,13 @@
 .hero {
-  background-color: #30363d;
+  background-color: #202429;
 }
-
+/* =========================Text modifications ===============================*/
 .navbar-text-logo,
 .home-title-text,
 .signup-title-text {
   font-family: 'Merriweather', serif;
   font-weight: 400;
+  color: white;
 }
 
 .navbar-text-logo {
@@ -21,6 +22,8 @@
 .signup-title-text {
   font-size: 3em;
 }
+
+/* ================ Search result page modifications ================ */
 .columns {
   max-width: 100%;
 }
@@ -30,6 +33,7 @@
   text-align: center;
 }
 
+/* ================ Custom button designs ================ */
 .btn-grad {
   background-image: linear-gradient(
     to right,

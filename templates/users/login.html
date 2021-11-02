@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+<!-- prettier-ignore -->
+{% block title %}Join Us{% endblock %}
+{%block content %}
+<section class="hero is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  {{navBarHeader()}}
+  <div class="hero-body has-text-white has-text-centered">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h1 class="signup-title-text m-2">
+            Login to view your favorite movies
+          </h1>
+        </div>
+        <div class="column box m-4">
+          <form method="POST">
+            <!-- prettier-ignore -->
+            {{ form.hidden_tag() }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+            <span class="help is-danger">{{ error }}</span>
+            {% endfor %}
+            <!-- prettier-ignore -->
+            <div class="field">
+            <div class="control">
+                 {{ field(placeholder=field.label.text,class="input") }} 
+            </div>
+        </div>
+            {% endfor %}
+            <p class="control">
+              <button class="button is-info btn-grad" type="submit">
+                Login
+              </button>
+              <a class="button is-danger btn-grad-danger" href="/"> Cancel </a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

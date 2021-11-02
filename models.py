@@ -11,13 +11,6 @@ db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.Text, nullable=False, unique=True)
-    email = db.Column(db.Text, nullable=False)
-    password = db.Column(db.Text, nullable=False)
-    image_url = db.Column(db.Text)
-
-    movies = db.relationship("User", secondary="userfavoritemovies")
 
     @classmethod
     def signup(cls, username, email, password, image_url):
@@ -58,18 +51,25 @@ class User(db.Model):
 
         return False
 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.Text, nullable=False, unique=True)
+    email = db.Column(db.Text, nullable=False)
+    password = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.Text)
+
+    favorites = db.relationship("FavoriteMovie")
+
 
 class FavoriteMovie(db.Model):
     __tablename__ = "favoritemovies"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.Text, nullable=False)
-
-
-class UserFavoriteMovie(db.Model):
-    __tablename__ = "userfavoritemovies"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.ForeignKey("users.id"))
-    movie_id = db.Column(db.ForeignKey('favoritemovies.id'))
+    imdbID = db.Column(db.Text, nullable=False)
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False,
+    )
+    user = db.relationship('User')
 
 
 def connect_db(app):
