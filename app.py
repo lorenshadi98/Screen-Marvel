@@ -113,6 +113,15 @@ def handle_home_search():
 # =============================== USER ROUTES ===============================
 
 
+@app.route("/account", methods=["GET"])
+def render_user_details():
+    if g.user:
+        return render_template("users/show.html")
+    else:
+        flash("Cannot view this page")
+        return redirect("/")
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def handle_user_signup():
     """Handles user signup. 

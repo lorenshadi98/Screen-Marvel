@@ -1,0 +1,37 @@
+{%extends "base.html"%}
+<!-- prettier-ignore -->
+{%block title %}Your Account{%endblock%}
+
+{% block content %}
+<!-- Hero head: will stick at the top -->
+<section class="hero is-fullheight">
+  {{navBarHeader()}}
+  <div class="hero-body has-text-centered">
+    <div class="container">
+      <div class="columns is-multiline m-3">
+        {% if g.user %}
+        <div class="column has-text-centered">
+          <h2 class="title general-text has-text-white">
+            Username: {{g.user.username}}
+          </h2>
+          <h2 class="subtitle general-text has-text-white">
+            Email: {{g.user.email}}
+          </h2>
+          <h2 class="subtitle general-text has-text-white">
+            Profile Image: {{g.user.image_url}}
+          </h2>
+        </div>
+        {%else%}
+        <div class="column has-text-centered">
+          <h1 class="title general-text has-text-white">No user info found</h1>
+          <h2 class="subtitle general-text has-text-white">
+            Log in to view your information!
+          </h2>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- prettier-ignore -->
+{%endblock%}

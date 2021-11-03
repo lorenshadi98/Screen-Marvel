@@ -5,7 +5,8 @@
 .navbar-text-logo,
 .home-title-text,
 .signup-title-text,
-.no-fav-title-text {
+.no-fav-title-text,
+.general-text {
   font-family: 'Merriweather', serif;
   font-weight: 400;
 }
@@ -22,7 +23,8 @@
 .signup-title-text {
   font-size: 3em;
 }
-.no-fav-title-text {
+.no-fav-title-text,
+.general-text {
   font-size: 3em;
 }
 /* ================ Search result page modifications ================ */
