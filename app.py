@@ -15,6 +15,8 @@ app = Flask(__name__)
 BASE_API_URL = "https://www.omdbapi.com/"
 
 
+# ============================= DATABASE AND APP CONFIG ==============================
+
 # Get DB_URI from environ variable (useful for production/testing) or,
 # if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = (
@@ -27,7 +29,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 connect_db(app)
 
 
-# ====================== favicon and helper functions ==============================
+# ====================== favicon loading page==============================
 
 
 @app.route('/favicon.ico')
@@ -36,7 +38,10 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
+# ============================= Movie query helper functions ==============================
+
 def handle_query_by_title(query):
+    """Handles the main page movie query by title only"""
     user_movie_search = {
         "s": query,
         "apikey": API_KEY,
@@ -49,6 +54,7 @@ def handle_query_by_title(query):
 
 
 def handle_query_by_imdbID(imdbID):
+    """Handles API query by IMBDID in order to save database space"""
     imdb_movie_search = {
         "i": imdbID,
         "apikey": API_KEY
@@ -57,6 +63,8 @@ def handle_query_by_imdbID(imdbID):
     data = response.text
     parsed_result = json.loads(data)
     return parsed_result
+
+# ============================= USER SESSION functions ==============================
 
 
 @app.before_request
@@ -82,17 +90,18 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
-# ========================= MAIN ROUTES ========================================
+# ========================= MAIN ROUTE and SEARCH ROUTE ========================================
 
 
 @app.route("/")
 def render_home():
-
+    """Renders home page"""
     return render_template("home.html")
 
 
 @app.route("/search", methods=["GET"])
 def handle_home_search():
+    """Handles movie search result (by title) only"""
     parsed_result = handle_query_by_title(request.args.get("movie_title"))
 
     if parsed_result["Response"] == "True":
@@ -106,6 +115,12 @@ def handle_home_search():
 
 @app.route("/signup", methods=["GET", "POST"])
 def handle_user_signup():
+    """Handles user signup. 
+    If the user is signed in they are redirected back to home.
+    If the signup form is insecure or invalid redirect to the form again for another attempt.
+    If the information is completed and valid the user is signed up and then logged in.
+
+    """
     if g.user:
         return redirect("/")
     else:
@@ -127,6 +142,9 @@ def handle_user_signup():
 
 @app.route("/login", methods=["GET", "POST"])
 def handle_login():
+    """Handles user signin. IF user is already signed in they are redirected to home.
+        If the user credientials are correct, they are logged in. Otherwise they try again.
+    """
     if g.user:
         return redirect("/")
     else:
@@ -146,6 +164,7 @@ def handle_login():
 
 @app.route('/logout', methods=["GET"])
 def handle_logout():
+    """Handles user logout."""
     if g.user:
         do_logout()
         return redirect("/")
@@ -177,6 +196,9 @@ def handle_adding_favorites(imdbID):
         flash("You must be logged in first to add a favorite", "warning")
         return redirect("/login")
     else:
+        # Creates favorite movie instance with minimal information to save storage. We
+        # all the API to handle the data of the favorited movie.
+
         movie = FavoriteMovie(imdbID=imdbID, user_id=g.user.id)
         db.session.add(movie)
         db.session.commit()
@@ -193,6 +215,8 @@ def handle_removing_favorites(imdbID):
         return redirect("/login")
     else:
         movie = FavoriteMovie.query.filter(imdbID == imdbID).first()
+        # removes the movie from the favorites list and then removes the instance from
+        # the database.
         g.user.favorites.remove(movie)
         db.session.delete(movie)
         db.session.commit()
