@@ -206,7 +206,7 @@ def handle_adding_favorites(imdbID):
         return redirect("/login")
     else:
         # Creates favorite movie instance with minimal information to save storage. We
-        # all the API to handle the data of the favorited movie.
+        # let the API to handle the rest of the data of the favorited movie.
 
         movie = FavoriteMovie(imdbID=imdbID, user_id=g.user.id)
         db.session.add(movie)
@@ -223,7 +223,8 @@ def handle_removing_favorites(imdbID):
         flash("You must be logged in first to remove a favorite", "warning")
         return redirect("/login")
     else:
-        movie = FavoriteMovie.query.filter(imdbID == imdbID).first()
+        movie = FavoriteMovie.query.filter(
+            FavoriteMovie.imdbID == imdbID).first()
         # removes the movie from the favorites list and then removes the instance from
         # the database.
         g.user.favorites.remove(movie)

@@ -18,12 +18,12 @@
         Search for your favorite movies, series, or episodes
       </p>
       <form action="{{url_for('handle_home_search')}}">
-        <div class="field is-grouped">
-          <p class="control is-expanded">
+        <div class="field is-grouped m-5">
+          <p class="control">
             <input
               class="input"
               type="text"
-              placeholder="What do you want to watch?"
+              placeholder="e.g. The Office"
               name="movie_title"
               required
             />
