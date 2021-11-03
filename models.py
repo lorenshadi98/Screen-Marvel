@@ -66,9 +66,7 @@ class FavoriteMovie(db.Model):
     imdbID = db.Column(db.Text, nullable=False)
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey('users.id', ondelete='CASCADE'),
-        nullable=False,
-    )
+        db.ForeignKey('users.id', ondelete='CASCADE'))
     user = db.relationship('User')
 
 

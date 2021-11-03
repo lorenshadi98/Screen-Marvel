@@ -4,7 +4,7 @@ import requests
 
 
 from sqlalchemy.exc import IntegrityError
-from flask import Flask, render_template, request, flash, redirect, session, g, send_from_directory
+from flask import Flask, render_template, request, flash, redirect, session, g, send_from_directory, url_for
 from key import API_KEY
 from models import connect_db, db, User, FavoriteMovie
 from forms import AddUserForm, EditUserForm, UserLoginForm
@@ -164,9 +164,8 @@ def render_user_favorites():
     else:
         favorites_list = []
         for favorite in g.user.favorites:
-            print("================favorite id is ========= ", favorite.imdbID)
             favorites_list.append(handle_query_by_imdbID(favorite.imdbID))
-        print("================================ Favorite list is =========", favorites_list)
+
         return render_template("users/favorites.html", url_list=favorites_list)
 
 
@@ -178,21 +177,38 @@ def handle_adding_favorites(imdbID):
         flash("You must be logged in first to add a favorite", "warning")
         return redirect("/login")
     else:
-        movie = FavoriteMovie(imdbID=imdbID)
-        g.user.favorites.append(movie)
+        movie = FavoriteMovie(imdbID=imdbID, user_id=g.user.id)
         db.session.add(movie)
         db.session.commit()
+
+        flash("Movie added to Favorites!", "success")
         return redirect("/favorites")
 
- ##############################################################################
-# Turn off all caching in Flask
-#   (useful for dev; in production, this kind of stuff is typically
-#   handled elsewhere) #
-# https://stackoverflow.com/questions/34066804/disabling-caching-in-flask
+
+@app.route("/favorites/remove/<imdbID>", methods=["GET", "POST"])
+def handle_removing_favorites(imdbID):
+    """removes a specified movie from user's favorites"""
+    if not g.user:
+        flash("You must be logged in first to remove a favorite", "warning")
+        return redirect("/login")
+    else:
+        movie = FavoriteMovie.query.filter(imdbID == imdbID).first()
+        print("---------------------- MOVIE IS ======================", movie)
+        print("---------------------- user fav. IS ======================",
+              g.user.favorites)
+        g.user.favorites.remove(movie)
+        db.session.delete(movie)
+        db.session.commit()
+        return redirect("/favorites")
 
 
 @app.after_request
 def add_header(req):
+    ##############################################################################
+    # Turn off all caching in Flask
+    #   (useful for dev; in production, this kind of stuff is typically
+    #   handled elsewhere) #
+    # https://stackoverflow.com/questions/34066804/disabling-caching-in-flask
     """Add non-caching headers on every request."""
 
     req.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"

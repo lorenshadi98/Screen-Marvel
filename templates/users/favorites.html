@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 <!-- prettier-ignore -->
-{%block title %}User favorites{%endblock%}
+{%block title %}Your favorites{%endblock%}
 
 {% block content %}
   <!-- Hero head: will stick at the top -->
@@ -26,7 +26,9 @@
             <div class="subtitle">
               <a  class="button is-success is-medium" href="https://www.imdb.com/title/{{key["imdbID"]}}" target="_blank">View on IMDB</a>
             </div>
-
+            <div class="subtitle">
+              <a class = "button is-danger is-small"href="/favorites/remove/{{key["imdbID"]}}">Remove Favorite</a>
+            </div>
           </div>
         
         </div>
