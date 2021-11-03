@@ -207,13 +207,17 @@ def handle_adding_favorites(imdbID):
     else:
         # Creates favorite movie instance with minimal information to save storage. We
         # let the API to handle the rest of the data of the favorited movie.
-
-        movie = FavoriteMovie(imdbID=imdbID, user_id=g.user.id)
-        db.session.add(movie)
-        db.session.commit()
-
-        flash("Movie added to Favorites!", "success")
-        return redirect("/favorites")
+        foundMovie = FavoriteMovie.query.filter(
+            FavoriteMovie.imdbID == imdbID).first()
+        if foundMovie:
+            flash("Movie already in your favorites!", "warning")
+            return redirect("/favorites")
+        else:
+            movie = FavoriteMovie(imdbID=imdbID, user_id=g.user.id)
+            db.session.add(movie)
+            db.session.commit()
+            flash("Movie added to Favorites!", "success")
+            return redirect("/favorites")
 
 
 @app.route("/favorites/remove/<imdbID>", methods=["GET", "POST"])
