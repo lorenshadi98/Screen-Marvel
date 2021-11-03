@@ -193,9 +193,6 @@ def handle_removing_favorites(imdbID):
         return redirect("/login")
     else:
         movie = FavoriteMovie.query.filter(imdbID == imdbID).first()
-        print("---------------------- MOVIE IS ======================", movie)
-        print("---------------------- user fav. IS ======================",
-              g.user.favorites)
         g.user.favorites.remove(movie)
         db.session.delete(movie)
         db.session.commit()

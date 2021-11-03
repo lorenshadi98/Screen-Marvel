@@ -64,8 +64,9 @@
           <div class="navbar-menu has-text-white" id="navbar-links">
             <div class="navbar-end">
               <a class="navbar-item is-active" href="/"> Home </a>
-              <a class="navbar-item" href="/favorites"> Favorites </a>
+
               {% if g.user %}
+              <a class="navbar-item" href="/favorites"> Favorites </a>
               <a class="navbar-item" href="/account"> Account </a>
               <span class="navbar-item has-text-centered">
                 <a class="button is-info is-inverted" href="/logout">
