@@ -12,30 +12,31 @@
   {{navBarHeader()}}
 
   <div class="hero-body has-text-white">
-    <div class="container has-text-centered is-fluid is-centered">
+    <div class="container has-text-centered is-fluid">
       <h1 class="home-title-text">Screen Marvel</h1>
       <p class="subtitle has-text-white">
         Search for your favorite movies, series, or episodes
       </p>
-      <form action="{{url_for('handle_home_search')}}">
-        <div class="field is-grouped">
-          <p class="control is-expanded has-icons-left">
-            <input
-              class="input control"
-              type="text"
-              placeholder="Find your next movie"
-              name="movie_title"
-              required
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-search"></i>
-            </span>
-          </p>
-          <p class="control">
-            <button class="button is-info btn-grad" type="submit">
+      <form action="{{url_for('handle_home_search')}}" class="is-centered">
+        <div class="container" style="width: 55%">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="text"
+                placeholder="Search Screen Marvel"
+                name="movie_title"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </p>
+          </div>
+          <div class="control">
+            <button class="button is-info btn-grad m-3" type="submit">
               Search
             </button>
-          </p>
+          </div>
         </div>
       </form>
     </div>
