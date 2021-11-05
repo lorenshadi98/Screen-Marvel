@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+<!-- prettier-ignore -->
+{% block title %}Discover{% endblock %}
+{%block content %}
+<section class="hero is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  {{navBarHeader()}}
+  <div class="hero-body has-text-white has-text-centered">
+    <div class="container">
+      <h1 class="general-text is-primary">
+        Select your favorite genre and see new movies.
+      </h1>
+
+      <form method="POST">
+        <!-- prettier-ignore -->
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+
+        <!-- prettier-ignore -->
+        <div class="select is-rounded mt-2 mb-4">
+            
+                 {{ field(placeholder=field.label.text,class="select") }} 
+
+        </div>
+        {% for error in field.errors %}
+        <span class="help is-danger mb-2">{{ error }}</span>
+        {% endfor %} {% endfor %}
+        <p class="control">
+          <button class="button is-info btn-grad" type="submit">
+            Discover
+          </button>
+          <a class="button is-danger btn-grad-danger" href="/"> Cancel </a>
+        </p>
+      </form>
+      <div id="discover-results" class="columns is-multiline mt-2">
+        {%for item in discover_result%}
+        <div class="column is-one-fifth m-2">
+          <img src="https://image.tmdb.org/t/p/w200/{{item["backdrop_path"]}}"
+          alt="image" />
+          <p class="movie-title-text has-text-white mb-2">
+            {{item["original_title"]}}
+          </p>
+          <p class="movie-details-text">Released: {{item["release_date"]}}</p>
+          <p class="movie-details-text">
+            Rating: {{item["vote_average"]}} <i class="far fa-star"></i>
+          </p>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

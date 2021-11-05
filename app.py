@@ -5,9 +5,9 @@ import requests
 
 from sqlalchemy.exc import IntegrityError
 from flask import Flask, render_template, request, flash, redirect, session, g, send_from_directory, url_for
-from key import API_KEY, SECRET_KEY
+from key import API_KEY, SECRET_KEY, TMDB_API_KEY
 from models import connect_db, db, User, FavoriteMovie
-from forms import AddUserForm, EditUserForm, UserLoginForm
+from forms import AddUserForm, EditUserForm, UserLoginForm, DiscoverMovieForm
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
@@ -64,6 +64,56 @@ def handle_query_by_imdbID(imdbID):
     parsed_result = json.loads(data)
     return parsed_result
 
+
+def handle_tmdb_discover(genreID):
+    """Generates a discover query result for the user's most favorited genre"""
+    # TODO generate a discover result from specified genreID
+    tmdb_discover_search = {
+        "api_key": TMDB_API_KEY,
+        "language": "en-US",
+        "page": '1',
+        "with_genres": genreID
+    }
+    response = requests.get(
+        "https://api.themoviedb.org/3/discover/movie", params=tmdb_discover_search)
+    data = response.text
+    parsed_result = json.loads(data)
+    return parsed_result
+
+
+# ========================= MAIN ROUTE and SEARCH ROUTES ========================================
+
+
+@app.route("/")
+def render_home():
+    """Renders home page"""
+    return render_template("home.html")
+
+
+@app.route("/search", methods=["GET"])
+def handle_home_search():
+    """Handles movie search result (by title) only"""
+    parsed_result = handle_query_by_title(request.args.get("movie_title"))
+
+    if parsed_result["Response"] == "True":
+        return render_template("movie/search.html", url_list=parsed_result["Search"])
+    else:
+        flash("No movie found!", 'danger')
+        return redirect("/")
+
+
+@app.route("/discover", methods=["GET", "POST"])
+def handle_discover_page():
+    form = DiscoverMovieForm()
+    if form.validate_on_submit():
+        movie_genreID = form.movie_genre.data
+        discover_result = handle_tmdb_discover(movie_genreID)
+
+        return render_template("movie/discover.html", discover_result=discover_result["results"], form=form)
+    else:
+        return render_template("movie/discover.html", form=form)
+
+
 # ============================= USER SESSION functions ==============================
 
 
@@ -90,25 +140,6 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
-# ========================= MAIN ROUTE and SEARCH ROUTE ========================================
-
-
-@app.route("/")
-def render_home():
-    """Renders home page"""
-    return render_template("home.html")
-
-
-@app.route("/search", methods=["GET"])
-def handle_home_search():
-    """Handles movie search result (by title) only"""
-    parsed_result = handle_query_by_title(request.args.get("movie_title"))
-
-    if parsed_result["Response"] == "True":
-        return render_template("movie/search.html", url_list=parsed_result["Search"])
-    else:
-        flash("No movie found!", 'danger')
-        return redirect("/")
 
 # =============================== USER ROUTES ===============================
 
@@ -207,8 +238,11 @@ def handle_adding_favorites(imdbID):
     else:
         # Creates favorite movie instance with minimal information to save storage. We
         # let the API to handle the rest of the data of the favorited movie.
+
+        # checks and handles movie duplication.
         foundMovie = FavoriteMovie.query.filter(
             FavoriteMovie.imdbID == imdbID).first()
+
         if foundMovie:
             flash("Movie already in your favorites!", "warning")
             return redirect("/favorites")
