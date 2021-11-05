@@ -36,15 +36,13 @@
       <div id="discover-results" class="columns is-multiline mt-2">
         {%for item in discover_result%}
         <div class="column is-one-fifth m-2">
-          <img src="https://image.tmdb.org/t/p/w200/{{item["backdrop_path"]}}"
+          <img src="https://image.tmdb.org/t/p/w200/{{item["poster_path"]}}"
           alt="image" />
           <p class="movie-title-text has-text-white mb-2">
             {{item["original_title"]}}
           </p>
           <p class="movie-details-text">Released: {{item["release_date"]}}</p>
-          <p class="movie-details-text">
-            Rating: {{item["vote_average"]}} <i class="far fa-star"></i>
-          </p>
+          <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
         </div>
         {%endfor%}
       </div>
