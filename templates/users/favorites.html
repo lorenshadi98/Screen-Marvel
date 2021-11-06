@@ -8,11 +8,11 @@
   {{navBarHeader()}}
   <div class="hero-body has-text-centered">
     <div class="container">
-      <div class="columns is-multiline m-3">
         {% if favorites_list|length == 0 %}
         <div class="column has-text-centered"> 
           <h1 class="title no-fav-title-text has-text-danger ">No Favorites Found!</h1> 
           <h2 class="subtitle no-fav-title-text has-text-white">Search for movies to add them.</h2>
+        </div>
         {%else%}
         <div
         id="main-search-result"
@@ -55,10 +55,9 @@
           {%else%}
           <p class="movie-details-text">Released: No Date Found</p>
           {%endif%}
-          <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
-          <a class="icon" href="/favorites/add/{{item["id"]}}/{{item["media_type"]}}"><i class="far fa-star"></i></a>
-          <div class="subtitle">
-            <a class = "button is-danger is-small"href="/favorites/remove/{{item["id"]}}">Remove Favorite</a>
+          <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p> 
+          <div class="subtitle m-2">
+            <a class = "button is-danger is-small"href="/favorites/remove/{{item["id"]}}"><i class="far fa-trash-alt"></i></a>
           </div>
         </div>
         {%endif%}
@@ -69,7 +68,7 @@
         {%endif%}
       </div>
     </div>
-  </div>
+</div>
 </section>
 <!-- prettier-ignore -->
 {%endblock%}

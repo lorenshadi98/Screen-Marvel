@@ -189,15 +189,15 @@ def handle_adding_favorites(id, media_type):
             return redirect("/favorites")
 
 
-@app.route("/favorites/remove/<imdbID>", methods=["GET", "POST"])
-def handle_removing_favorites(imdbID):
+@app.route("/favorites/remove/<int:id>", methods=["GET", "POST"])
+def handle_removing_favorites(id):
     """removes a specified movie from user's favorites"""
     if not g.user:
         flash("You must be logged in first to remove a favorite", "warning")
         return redirect("/login")
     else:
         movie = FavoriteMovie.query.filter(
-            FavoriteMovie.imdbID == imdbID).first()
+            FavoriteMovie.content_id == id).first()
         # removes the movie from the favorites list and then removes the instance from
         # the database.
         g.user.favorites.remove(movie)
