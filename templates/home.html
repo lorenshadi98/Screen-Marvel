@@ -40,6 +40,47 @@
           </div>
         </div>
       </form>
+      <div id="main-search-result" class="columns is-multiline mt-2">
+        {%for item in search_result%}
+        <!-- prettier-ignore -->
+        <div class="column is-one-fifth m-2">
+          <!-- prettier-ignore -->
+          
+           <!-- Image and poster checks -->
+          {%if item["poster_path"] != None %}
+          <img src="https://image.tmdb.org/t/p/w200/{{item["poster_path"]}}"
+          alt="image" />
+          {%else%}
+          <img
+            src="https://via.placeholder.com/200x300?text=No+Poster+Found"
+            alt="Placeholder image"
+          />
+          {%endif%}
+
+          <!-- Title and original title checks -->
+          
+          <p class="movie-title-text has-text-white mb-2">
+            {% if item["title"]| length > 0 %}
+                {{item["title"]}}
+            {%else%}
+              {%if item["original_title"] | length > 0%}
+                {{item["original_title"]}}
+              {%else%}
+              No title found
+            {%endif%}
+            {%endif%}
+          </p>
+
+          
+          {%if item["release_date"]| length > 0 %}
+          <p class="movie-details-text">Released: {{item["release_date"]}}</p>
+          {%else%}
+          <p class="movie-details-text">Released: No Date Found</p>
+          {%endif%}
+          <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
+        </div>
+        {%endfor%}
+      </div>
     </div>
   </div>
 </section>

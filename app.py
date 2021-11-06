@@ -42,12 +42,17 @@ def favicon():
 
 def handle_query_by_title(query):
     """Handles the main page movie query by title only"""
+    # Sample query: https://api.themoviedb.org/3/search/movie?
+    # api_key=18844f2c950dd9b8f53a0beff301a9b8&language=en-US&query=
+    # hunger%20games&page=1&include_adult=false
     user_movie_search = {
-        "s": query,
-        "apikey": API_KEY,
-        "page": '1'
+        "api_key": TMDB_API_KEY,
+        "Language": "en-US",
+        "query": query,
+        "include_adult": "false"
     }
-    response = requests.get(BASE_API_URL, params=user_movie_search)
+    response = requests.get(
+        "https://api.themoviedb.org/3/search/multi", params=user_movie_search)
     data = response.text
     parsed_result = json.loads(data)
     return parsed_result
@@ -94,9 +99,9 @@ def render_home():
 def handle_home_search():
     """Handles movie search result (by title) only"""
     parsed_result = handle_query_by_title(request.args.get("movie_title"))
-
-    if parsed_result["Response"] == "True":
-        return render_template("movie/search.html", url_list=parsed_result["Search"])
+    print(json.dumps(parsed_result, indent=4, sort_keys=True))
+    if len(parsed_result["results"]) > 0:
+        return render_template("home.html", search_result=parsed_result["results"])
     else:
         flash("No movie found!", 'danger')
         return redirect("/")
@@ -105,13 +110,16 @@ def handle_home_search():
 @app.route("/discover", methods=["GET", "POST"])
 def handle_discover_page():
     form = DiscoverMovieForm()
+    movie_genreID = '28'
+    discover_result = handle_tmdb_discover(movie_genreID)
+
     if form.validate_on_submit():
         movie_genreID = form.movie_genre.data
         discover_result = handle_tmdb_discover(movie_genreID)
 
         return render_template("movie/discover.html", discover_result=discover_result["results"], form=form)
     else:
-        return render_template("movie/discover.html", form=form)
+        return render_template("movie/discover.html", discover_result=discover_result["results"], form=form)
 
 
 # ============================= USER SESSION functions ==============================
