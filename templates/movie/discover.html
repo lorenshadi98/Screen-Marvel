@@ -35,6 +35,7 @@
           </p>
           <p class="movie-details-text">Released: {{item["release_date"]}}</p>
           <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
+          <a class="icon" href="/favorites/add/{{item["id"]}}/movie"><i class="far fa-star"></i></a>
         </div>
         {%endfor%}
       </div>
