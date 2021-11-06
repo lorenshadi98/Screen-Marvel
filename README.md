@@ -16,11 +16,7 @@ API link: https://developers.themoviedb.org/3/getting-started/introduction
 
 Technology and Tools used:
 1. Python:
-
-  	a. Flask
-  	b. SQLAlchemy
- 	 	c. WTForms
- 		d. Jinja templating
+ Flask, SQLAlchemy, WTForms, Jinja templating
      
  2. JavaScript
  3. Bulma (front-end framework)
