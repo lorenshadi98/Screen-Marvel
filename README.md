@@ -1,10 +1,12 @@
 # Screen-Marvel
-API link: http://www.omdbapi.com/
-
-
+API link: https://developers.themoviedb.org/3/getting-started/introduction
 Site link: https://screenmarvel.herokuapp.com/
 
-Technology and Tools used:
+
+
+
+
+#Technology and Tools used:
 1. Python:
   a. Flask
   b. SQLAlchemy
