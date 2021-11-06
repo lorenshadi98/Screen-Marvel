@@ -18,12 +18,9 @@ Technology and Tools used:
 1. Python:
 
   	a. Flask
-    
   	b. SQLAlchemy
-    
  	 	c. WTForms
-    
- 		 d. Jinja templating
+ 		d. Jinja templating
      
  2. JavaScript
  3. Bulma (front-end framework)
