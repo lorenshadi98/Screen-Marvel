@@ -63,7 +63,8 @@ class User(db.Model):
 class FavoriteMovie(db.Model):
     __tablename__ = "favoritemovies"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    movie_id = db.Column(db.Text, nullable=False)
+    content_id = db.Column(db.Integer, nullable=False)
+    content_type = db.Column(db.Text)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id', ondelete='CASCADE'))

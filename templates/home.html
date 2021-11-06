@@ -66,8 +66,8 @@
             <!-- prettier-ignore -->
             {{item["title"]}} 
             {%else%} 
-            {%if item["original_title"] | length > 0%} 
-            {{item["original_title"]}}
+            {%if item["original_name"] | length > 0%} 
+            {{item["original_name"]}}
             {%else%} 
             No title found 
             {%endif%} 
@@ -80,6 +80,7 @@
           <p class="movie-details-text">Released: No Date Found</p>
           {%endif%}
           <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
+          <a class="icon" href="/favorites/add/{{item["id"]}}/{{item["media_type"]}}"><i class="far fa-star"></i></a>
         </div>
         {%endif%}
         <!-- prettier-ignore -->

@@ -9,35 +9,63 @@
   <div class="hero-body has-text-centered">
     <div class="container">
       <div class="columns is-multiline m-3">
-        {% if url_list|length == 0 %}
+        {% if favorites_list|length == 0 %}
         <div class="column has-text-centered"> 
           <h1 class="title no-fav-title-text has-text-danger ">No Favorites Found!</h1> 
           <h2 class="subtitle no-fav-title-text has-text-white">Search for movies to add them.</h2>
         {%else%}
-        {% for key in url_list %}
-        <div class="column box m-3 is-one-quarter">
+        <div
+        id="main-search-result"
+        class="columns is-multiline mt-2 is-centered"
+      >
+        {%for item in favorites_list%}
+        <!-- prettier-ignore -->
+        <!-- ignores people/person search results -->
+        {%if item["media_type"] != "person" %}
+        <div class="column is-one-fifth m-2">
           <!-- prettier-ignore -->
-  
-          {%if key["Poster"] != "N/A" %} 
-          <img class="image" src="{{key["Poster"]}}" alt="Movie image" width="300" height="450"/> 
+          <!-- Image and poster checks -->
+          {%if item["poster_path"] != None %} 
+          <img
+          src="https://image.tmdb.org/t/p/w200/{{item["poster_path"]}}"
+          alt="image" /> 
           {%else%}
           <img
-            src="https://via.placeholder.com/300x450?text=No+Movie+Poster+Found"
+            src="https://via.placeholder.com/200x300?text=No+Poster+Found"
             alt="Placeholder image"
           />
           {%endif%}
-          <div class="title">{{key["Title"]}} ({{key["Year"]}})</div>
-          <div class="container m-2">
-            <div class="subtitle">
-              <a  class="button is-success is-medium" href="https://www.imdb.com/title/{{key["imdbID"]}}" target="_blank">View on IMDB</a>
-            </div>
-            <div class="subtitle">
-              <a class = "button is-danger is-small"href="/favorites/remove/{{key["imdbID"]}}">Remove Favorite</a>
-            </div>
+
+          <!-- Title and original title checks -->
+          <p class="movie-title-text has-text-white mb-2">
+            {% if item["title"]| length > 0 %}
+            <!-- prettier-ignore -->
+            {{item["title"]}} 
+            {%else%} 
+            {%if item["original_name"] | length > 0%} 
+            {{item["original_name"]}}
+            {%else%} 
+            No title found 
+            {%endif%} 
+            {%endif%}
+          </p>
+
+          {%if item["release_date"]| length > 0 %}
+          <p class="movie-details-text">Released: {{item["release_date"]}}</p>
+          {%else%}
+          <p class="movie-details-text">Released: No Date Found</p>
+          {%endif%}
+          <p class="movie-details-text">Rating: {{item["vote_average"]}}/10</p>
+          <a class="icon" href="/favorites/add/{{item["id"]}}/{{item["media_type"]}}"><i class="far fa-star"></i></a>
+          <div class="subtitle">
+            <a class = "button is-danger is-small"href="/favorites/remove/{{item["id"]}}">Remove Favorite</a>
           </div>
-        
         </div>
-        {% endfor %}
+        {%endif%}
+        <!-- prettier-ignore -->
+
+        {%endfor%}
+
         {%endif%}
       </div>
     </div>
