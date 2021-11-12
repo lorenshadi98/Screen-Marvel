@@ -1,3 +1,5 @@
 venv/
 dev-to.txt
 __pycache__
+Procfile
+runtime.txt
