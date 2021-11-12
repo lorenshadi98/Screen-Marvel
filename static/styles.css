@@ -99,3 +99,7 @@
 .discover-result {
   background-color: transparent;
 }
+#navbar-links .is-active {
+  color: #f8f8f8;
+  background-color: #02aab0;
+}

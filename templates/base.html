@@ -67,7 +67,7 @@
           </div>
           <div class="navbar-menu has-text-white" id="navbar-links">
             <div class="navbar-end">
-              <a class="navbar-item is-active" href="/"> Home </a>
+              <a class="navbar-item" href="/"> Home </a>
               <a class="navbar-item" href="/discover">Discover</a>
               {% if g.user %}
               <a class="navbar-item" href="/favorites"> Favorites </a>
@@ -96,6 +96,7 @@
         </div>
       </nav>
     </div>
+
     {%- endmacro %}
     <!-- WEBSITE MESSAGE FLASHING AND ERRORS -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
@@ -110,6 +111,11 @@
     {% endif %} {% endwith %}
     <!-- WEBSITE CONTENT HERE -->
     <div id="content">{% block content %}{% endblock %}</div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="static/index.js"></script>
   </body>
 </html>
