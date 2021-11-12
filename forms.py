@@ -13,13 +13,6 @@ class AddUserForm(FlaskForm):
     image_url = StringField("Profile Image:")
 
 
-class EditUserForm(FlaskForm):
-    """Form for User Edit information"""
-    username = StringField("Username:")
-    email = StringField("Email:")
-    image_url = StringField("Profile Image:")
-
-
 class UserLoginForm(FlaskForm):
     """Form for user login"""
     username = StringField("Username:")
